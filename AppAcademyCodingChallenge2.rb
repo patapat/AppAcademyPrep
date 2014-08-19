@@ -65,6 +65,8 @@
 
 # subsets(["a", "b", "c"])
 
+
+
 # def LetterChanges(str)
 #   i = 0
 #   str.each_char do |char|
@@ -94,6 +96,12 @@
 # end
 
 # LongestWord("I love dogs$@")
+
+# def LongestWord(sentence)
+# 	print sentence.gsub(/(\W|\d)/, " ").split(/ /).group_by(&:size).max.last.first
+# end
+
+# LongestWord("hello, how are you doing on this glorious day?")
 
 # def SimpleAdding(num)
 #   sum = (1..num).inject(:+)
@@ -171,24 +179,24 @@
 
 # ArrayAdditionI([3,5,-1,8,12])
 
-# def LetterCountI(str)
-# 	greatest_diff = 0
-# 	greatest_word = ""
-# 	str.split.each do |word|
-# 		word.split('').uniq
-# 		temp_diff = word.length - word.split('').uniq.length
-# 		if temp_diff > greatest_diff
-# 			greatest_diff = temp_diff
-# 			greatest_word = word
-# 		end
-# 	end
-#   # code goes here
-#   	if greatest_word == ""
-#   		puts "-1"
-#   	else
-#   		puts greatest_word
-#   	end
-# end
+def LetterCountI(str)
+	greatest_diff = 0
+	greatest_word = ""
+	str.split.each do |word|
+		word.split('').uniq
+		temp_diff = word.length - word.split('').uniq.length
+		if temp_diff > greatest_diff
+			greatest_diff = temp_diff
+			greatest_word = word
+		end
+	end
+  # code goes here
+  	if greatest_word == ""
+  		puts "-1"
+  	else
+  		puts greatest_word
+  	end
+end
 
 # LetterCountI("no wordfd")
 
@@ -306,7 +314,7 @@
 # def PrimeTime(num)
 # 	sqrt = Math.sqrt(num).ceil
 # 	for i in 2..sqrt
-# 		if num % i == 0 	&& num != 2
+# 		if num % i == 0 && num != 2
 # 			return false
 # 		end
 # 	end
@@ -400,23 +408,199 @@
          
 # end
 
-def doors100(num)
-	increment = 1
-	doors = Hash.new(true)
-	num.times do |i|
-		doors[i] = true
-	end
-	num.times do
-		(increment..num).step(increment) do |i|
-			if doors[increment] == false
-				doors[increment] = true
-			else
-				doors[increment] = false
-			end
+# def doors100(num)
+# 	increment = 1
+# 	doors = Hash.new(true)
+# 	num.times do |i|
+# 		doors[i] = true
+# 	end
+# 	num.times do
+# 		(increment..num).step(increment) do |i|
+# 			if doors[increment] == false
+# 				doors[increment] = true
+# 			else
+# 				doors[increment] = false
+# 			end
+# 		end
+# 		increment += 1
+# 	end
+# 	print doors
+# end
+
+# doors100(100)
+
+# def LetterChanges(str)
+# 	final = ""
+# 	str.split("").map do |char|
+# 		char.next! if char =~ /[A-Za-z]/
+# 		char.upcase! if char =~ /[aeiou]/
+# 		final += char
+# 	end
+# 	puts final
+# end
+# LetterChanges("charming day isn't it?")
+
+# def LetterCapitalize(str)
+# 	final = str.split.map { |word| word.capitalize! }.join(" ")
+# 	puts final
+# end
+
+# LetterCapitalize("hello there mate")
+
+# def SimpleSymbols(str)
+# 	puts str.gsub(/(\+[A-Za-z])+\+/, '').index(/[A-Za-z]/)
+# end
+
+# SimpleSymbols("++d+===+c++==+a+")
+
+# def SimpleMode(arr)
+# 	mode_hash = arr.inject(Hash.new(0)) { |hash, num| hash[num] += 1; hash }
+# 	puts mode_hash
+# end
+
+# SimpleMode([1,2,3,4,5,5,5,6])
+
+# def ThreeFiveMultiples(num)
+# 	sum = (3...num).step(3).inject(:+) + (5...num).step(5).inject(:+)
+# 	puts sum
+# end
+
+# ThreeFiveMultiples(10)
+
+# def can_make_word(str)
+# 	count = 0
+# 	arr = [["B", "O"], 
+# 		["X", "K"], 
+# 		["D", "Q"], 
+# 		["C", "P"], 
+# 		["N", "A"],
+# 		["G", "T"], 
+# 		["R", "E"], 
+# 		["T", "G"],
+# 		["Q", "D"],
+# 		["F", "S"],
+# 		["J", "W"],
+# 		["H", "U"],
+# 		["V", "I"],
+# 		["A", "N"],
+# 		["O", "B"],
+# 		["E", "R"],
+# 		["F", "S"],
+# 		["L", "Y"],
+# 		["P", "C"],
+# 		["Z", "M"]]
+# 	str.each_char do |char|
+# 		arr.each do |block|
+# 			if block.include?(char)
+# 				arr.delete(block)
+# 				count += 1
+# 				break
+# 			end
+# 		end
+# 	end
+# 	if count == str.length
+# 		puts true
+# 	else
+# 		puts false
+# 	end
+# end
+
+# can_make_word("BOOK")
+# words = %w(A BaRK BOoK tREaT COmMOn SqUAD CoNfuSE) << ""
+# print words
+# words.each do |word|
+#   blocks = "BO XK DQ CP NA GT RE TG QD FS JW HU VI AN OB ER FS LY PC ZM"
+#   res = word.each_char.all?{|c| blocks.sub!(/\w?#{c}\w?/i, "")}  #regexps can be interpolated like strings
+#   puts "#{word}: #{res}"
+# end
+
+# def amb(*args)
+# 	check = true
+# 	last = args[0][0]
+# 	args.each do |word|
+# 		start = word[0]
+# 		if start != last
+# 			check = false
+# 			break
+# 		end
+# 		last = word[-1]
+# 	end
+# 	puts check
+# end
+
+# amb("hi", "ither", "rith", "ither")
+
+# def rec_intersection(rect1, rect2)
+# 	x_min = [rect1[0][0], rect2[0][0]].max
+# 	x_max = [rect1[1][0], rect2[1][0]].min
+
+# 	y_min = [rect1[0][1], rect2[0][1]].max
+# 	y_max = [rect1[1][1], rect2[1][1]].min
+# 	return nil if x_max < x_min || y_max < y_min
+# 	print [[x_min, y_min], [x_max, y_max]]
+# end
+
+# rec_intersection([[1, 1], [5, 4]],
+#       [[2, 2], [3, 5]])
+
+# def ArithGeo(arr)
+# end
+
+# n = 0
+# loop do
+#   puts "%o" % n
+#   n += 1
+#   return false if n == 11
+# # end
+
+# def makechange(num)
+# 	q, d, n, p = 25, 10, 5, 1
+# 	q_count, d_count, n_count, p_count = 0, 0, 0, 0
+# 	while num >= q
+# 		num -= q
+# 		q_count += 1
+# 	end
+# 	while num >= d
+# 		num -= d
+# 		d_count += 1
+# 	end
+# 	while num >= n
+# 		num -= n
+# 		n_count += 1
+# 	end
+# 	while num >= p
+# 		num -= p
+# 		p_count += 1
+# 	end
+
+# 	puts "#{q_count} quarters, #{d_count} dimes, #{n_count} nickels, #{p_count} pennies"
+# end
+
+# makechange(94)
+
+# def floyd(rows)
+#   max = (rows * (rows + 1)) / 2
+#   widths = ((max - rows + 1)..max).map {|n| n.to_s.length + 1}
+#   n = 0
+#   rows.times do |r|
+#     puts (0..r).map {|i| n += 1; "%#{widths[i]}d" % n}.join
+#   end
+# end
+
+# floyd(5)
+
+def josephus(prisoners, n)
+	pris = (0...prisoners).to_a
+	puts pris.length
+	pris_dup = pris
+	while pris.length > 1
+		while increment < pris.length
+			puts increment
+			increment += n
+			pris_dup.delete(increment)
 		end
-		increment += 1
+		pris = pris.dup
 	end
-	print doors
 end
 
-doors100(100)
+josephus(5, 2)
